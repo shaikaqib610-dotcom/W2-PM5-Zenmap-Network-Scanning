@@ -1,119 +1,175 @@
-# W2-PM5 -- Network Scanning with Zenmap
+# W2-PM5 – Network Scanning with Zenmap
 
-**Project module:** Week 2 \| Project Module 5\
-**Program:** Networkwalks \| Batch B084\
-**Author:** Shaik Mahboob Mohiuddin\
-**Tool:** Zenmap (Nmap GUI) on Windows\
-**Target:** Own local Wi-Fi LAN (`192.168.1.0/24`)
+**Project Module:** Week 2 – Project Module 5  
+**Program:** Networkwalks | Batch B084  
+**Author:** Shaik Mahboob Mohiuddin  
+**Tools:** Zenmap, Nmap, Windows CMD  
+**Target Network:** `192.168.1.0/24`
 
-## Overview
+---
 
-This project documents an authorized local-network discovery exercise
-using Zenmap. The tasks follow the supplied Networkwalks W2-PM5
-practical: install Zenmap, identify the local IP/subnet, discover live
-hosts, record IP and MAC information, and create a topology view.
+## 1. Project Overview
 
-## Objectives
+This project focuses on network discovery and scanning using Zenmap, the graphical interface of Nmap. The main objective is to identify active devices, discover live hosts, collect IP address information, examine MAC address details, perform port scanning, and visualize the network topology.
 
--   Identify the Windows PC's local IPv4 address and subnet.
--   Discover active hosts on the local `/24` network.
--   Record observed IP addresses and hostnames.
--   Record MAC addresses only where the evidence confirms them.
--   Review selected TCP service-scan results and network topology.
+This practical project was completed as part of the Cybersecurity Program at Networkwalks.
 
-## Environment and tools
+## 2. Objectives
 
--   Windows PC
--   Zenmap / Nmap
--   Windows Command Prompt (`ipconfig /all`)
--   Local Wi-Fi network
+- Identify the local IP address and subnet.
+- Discover active hosts in the local network.
+- Identify the IP addresses and hostnames of live devices.
+- Examine MAC address information.
+- Perform basic port and service scanning.
+- Visualize the network topology.
+- Understand the basics of network reconnaissance.
 
-## Results
+## 3. Tools and Technologies Used
 
-The Windows adapter details showed: - IPv4 address: `192.168.1.11` -
-Subnet mask: `255.255.255.0` - Subnet: `192.168.1.0/24` - Default
-gateway: `192.168.1.1` - Local Wi-Fi adapter MAC: `CC-47-40-F5-7E-B4`
+| Tool | Purpose |
+|---|---|
+| Zenmap | Graphical network scanning |
+| Nmap | Network discovery and port scanning |
+| Windows CMD | IP and MAC address identification |
+| Windows Wi-Fi | Local network connection |
 
-The primary Ping Scan output reported **7 hosts up** out of 256
-addresses:
+## 4. Network Configuration
 
-  Host                   IP address
-  ---------------------- ----------------
-  Router / unnamed       `192.168.1.1`
-  Ayesha-s-A36           `192.168.1.4`
-  Galaxy-A57-5G          `192.168.1.5`
-  Uni.\*20DVR            `192.168.1.6`
-  Redmi-Note-9-Pro-Max   `192.168.1.7`
-  SHAIK (local PC)       `192.168.1.11`
-  V2336                  `192.168.1.13`
+The following details were collected using the Windows `ipconfig /all` command.
 
-A later repeat Ping Scan screenshot showed 5 hosts up. The topology
-screenshot includes an iPhone at `192.168.1.8`; these are separate scan
-snapshots because device availability can change.
+| Parameter | Result |
+|---|---|
+| IPv4 Address | `192.168.1.11` |
+| Subnet Mask | `255.255.255.0` |
+| Network Subnet | `192.168.1.0/24` |
+| Default Gateway | `192.168.1.1` |
+| Local MAC Address | `CC-47-40-F5-7E-B4` |
 
-## MAC address evidence
+## 5. Live Host Discovery
 
-The only MAC address confirmed in the supplied screenshots is the local
-Windows Wi-Fi adapter: `192.168.1.11` → `CC-47-40-F5-7E-B4`. MAC
-addresses for other hosts were not visible in the supplied Nmap output
-and are not guessed.
+A Ping Scan was performed using Zenmap to identify active devices in the subnet.
 
-## Additional port observations
-
-  -----------------------------------------------------------------------
-  Host                    Open TCP ports shown    Service labels
-  ----------------------- ----------------------- -----------------------
-  `192.168.1.1`           53, 80, 443             DNS/domain, HTTP, HTTPS
-
-  `192.168.1.6`           80, 554                 HTTP, RTSP
-
-  `192.168.1.11`          135, 139, 445, 6646     MSRPC, NetBIOS-SSN,
-                                                  Microsoft-DS, unknown
-  -----------------------------------------------------------------------
-
-An open port is not automatically a vulnerability; further validation is
-required.
-
-## Limitations
-
--   MAC addresses for other discovered devices were not visible in the
-    supplied scan output.
--   The initial scan reported 7 hosts; a later repeat scan reported 5.
--   The topology screenshot includes `192.168.1.8`, suggesting a
-    different scan snapshot.
--   The exported topology PDF requested in the practical was not
-    supplied.
-
-## Repository structure
-
-``` text
-W2-PM5-Zenmap-Network-Scanning/
-├── README.md
-├── report/
-│   └── W2-PM5_Network_Scanning_with_Zenmap_Report.pdf
-└── evidence/
-    ├── CMD.png
-    ├── initial-ping-scan.png
-    ├── live-hosts-repeat-scan.png
-    ├── topology.png
-    ├── ports.png
-    ├── quick-scan.png
-    └── zenmap.png
-```
-
-## Run the discovery scan
-
-Only scan networks you own or have explicit permission to assess.
-
-``` bash
+**Command:**
+```bash
 nmap -sn 192.168.1.0/24
 ```
 
-On Windows, run `ipconfig /all` to inspect the local adapter address and
-subnet mask.
+**Scan Results:**
 
-## Disclaimer
+- Total IP addresses scanned: 256
+- Initial live hosts detected: 7
+- Scan type: Ping Scan
 
-This project is for educational purposes and documents activity on the
-author's own local network. Do not scan systems or networks without
-authorization.
+### List of Live Hosts
+
+| No. | Hostname | IP Address |
+|---|---|---|
+| 1 | Router | `192.168.1.1` |
+| 2 | Ayesha-s-A36 | `192.168.1.4` |
+| 3 | Galaxy-A57-5G | `192.168.1.5` |
+| 4 | Uni.*20DVR | `192.168.1.6` |
+| 5 | Redmi-Note-9-Pro-Max | `192.168.1.7` |
+| 6 | SHAIK | `192.168.1.11` |
+| 7 | V2336 | `192.168.1.13` |
+
+A later repeat scan detected 5 live hosts. Network device availability may change between scans.
+
+## 6. MAC Address Identification
+
+The Windows `ipconfig /all` output identified the physical address of the local Wi-Fi adapter.
+
+**Confirmed MAC Address:**
+
+`192.168.1.11 → CC-47-40-F5-7E-B4`
+
+MAC addresses for the other devices were not visible in the supplied scan evidence and have not been assumed.
+
+## 7. Port Scanning and Service Identification
+
+Zenmap Quick Scan was used to identify open TCP ports on selected devices.
+
+| Host IP | Open Ports | Services |
+|---|---|---|
+| `192.168.1.1` | 53, 80, 443 | DNS, HTTP, HTTPS |
+| `192.168.1.6` | 80, 554 | HTTP, RTSP |
+| `192.168.1.11` | 135, 139, 445, 6646 | MSRPC, NetBIOS, Microsoft-DS, Unknown |
+
+An open port does not automatically indicate a security vulnerability. Further investigation is required to determine potential risks.
+
+## 8. Network Topology
+
+The Zenmap topology feature was used to visualize the discovered devices and their network relationships.
+
+The topology screenshot includes the router, local computer, and connected devices. It also shows an iPhone at `192.168.1.8`, which was not listed in the initial seven-host scan.
+
+## 9. Project Screenshots and Evidence
+
+### 9.1 Windows IP Configuration
+
+![Windows IP Configuration](./CMD.png)
+
+### 9.2 Initial Ping Scan – 7 Live Hosts
+
+![Initial Ping Scan](./initial-ping-scan.png)
+
+### 9.3 Repeat Ping Scan – 5 Live Hosts
+
+![Repeat Ping Scan](./live-hosts-repeat-scan.png)
+
+### 9.4 Network Topology Diagram
+
+![Network Topology](./topology.png)
+
+### 9.5 Ports and Hosts
+
+![Ports and Hosts](./ports.png)
+
+### 9.6 Quick Scan Results
+
+![Quick Scan](./quick-scan.png)
+
+### 9.7 Zenmap Application
+
+![Zenmap Application](./zenmap.png)
+
+## 10. Project Report
+
+The complete project documentation is available below.
+
+📄 **[Click Here to View / Download the Project Report (PDF)](./W2-PM5_REPORT.pdf)**
+
+## 11. Security Recommendations
+
+- Use strong passwords for router and DVR administration.
+- Disable unnecessary network services.
+- Restrict unauthorized access to DVR and RTSP services.
+- Keep network devices and operating systems updated.
+- Configure Windows Firewall properly.
+- Use WPA2 or WPA3 Wi-Fi security.
+- Regularly monitor connected devices.
+- Maintain an updated network inventory.
+
+## 12. Conclusion
+
+This project provided practical experience in network discovery, host identification, and basic port scanning using Zenmap and Nmap.
+
+The initial scan successfully identified seven live hosts in the local subnet `192.168.1.0/24`. The project also demonstrated IP address identification, MAC address examination, TCP port discovery, and network topology visualization.
+
+This exercise improved my understanding of network reconnaissance and basic network security assessment.
+
+## 13. Limitations
+
+- MAC addresses of all other discovered devices were not available in the supplied scan output.
+- The initial scan detected seven hosts, while the repeat scan detected five.
+- The topology screenshot represents a different discovery snapshot.
+- An exported topology PDF was not included in the supplied evidence.
+
+## 14. Disclaimer
+
+This project was conducted for educational purposes on an authorized local network. Network scanning should only be performed on systems and networks for which permission has been granted.
+
+---
+
+**Project:** W2-PM5 – Network Scanning with Zenmap  
+**Created by:** Shaik Mahboob Mohiuddin  
+**Program:** Networkwalks | Batch B084
